@@ -1,0 +1,29 @@
+# Binary
+wstatus
+
+# Object files
+*.o
+src/*.o
+
+# Man page
+*.1
+
+# Nix
+result
+result-*
+
+# Editor
+*.swp
+*.swo
+*~
+.*.swp
+.*.swo
+
+# Testing
+wstatus.cfg
+
+# IDE
+.vscode/
+.idea/
+
+.git
