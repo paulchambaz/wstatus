@@ -1,7 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Iinclude
-TARGET = $(notdir $(CURDIR))
+PREFIX = /usr/local
+MANPREFIX = $(PREFIX)/share/man
 
+TARGET = $(notdir $(CURDIR))
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 
@@ -11,7 +13,19 @@ $(TARGET): $(OBJ)
 src/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+install: $(TARGET)
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
+	cp -f $(TARGET) $(DESTDIR)$(PREFIX)/bin
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	scdoc < wstatus.1.scd | sed "s/1980-01-01/$(date '+%B %Y')/" > $(DESTDIR)$(MANPREFIX)/man1/wstatus.1
+	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/wstatus.1
+
+uninstall:
+	rm -f $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	rm -f $(DESTDIR)$(MANPREFIX)/man1/wstatus.1
+
 clean:
 	rm -f src/*.o $(TARGET)
 
-.PHONY: clean
+.PHONY: clean install uninstall
