@@ -138,6 +138,7 @@ int main(int argc, char **argv) {
         first = 0;
       }
     }
+    putchar(' ');
     putchar('\n');
     fflush(stdout);
 
