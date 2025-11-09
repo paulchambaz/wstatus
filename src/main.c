@@ -120,6 +120,7 @@ int main(int argc, char **argv) {
       }
     }
 
+    putchar(' ');
     int first = 1;
     for (i = 0; i < ncmds; i++) {
       char *s = commands[i].out;
