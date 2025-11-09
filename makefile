@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Iinclude
 PREFIX = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 
-TARGET = $(notdir $(CURDIR))
+TARGET = wstatus
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 

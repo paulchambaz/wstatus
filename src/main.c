@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 
   if (argc > 1 && !strcmp(argv[1], "-r")) {
     signal(SIGUSR1, SIG_IGN);
-    system("killall -USR1 wstatus");
+    (void)system("killall -USR1 wstatus");
     return 0;
   }
 
@@ -102,7 +102,7 @@ int main(int argc, char **argv) {
     return 1;
   }
   snprintf(config_path, sizeof(config_path), "%s/.config/wstatus.cfg", home);
-  loadconfig("wstatus.cfg");
+  loadconfig(config_path);
 
   for (;;) {
     now = gettime();
