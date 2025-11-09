@@ -120,10 +120,23 @@ int main(int argc, char **argv) {
       }
     }
 
+    int first = 1;
     for (i = 0; i < ncmds; i++) {
-      if (i > 0)
-        fputs(" | ", stdout);
-      fputs(commands[i].out, stdout);
+      char *s = commands[i].out;
+      int empty = 1;
+      while (*s) {
+        if (*s != ' ' && *s != '\t') {
+          empty = 0;
+          break;
+        }
+        s++;
+      }
+      if (!empty) {
+        if (!first)
+          fputs(" | ", stdout);
+        fputs(commands[i].out, stdout);
+        first = 0;
+      }
     }
     putchar('\n');
     fflush(stdout);
